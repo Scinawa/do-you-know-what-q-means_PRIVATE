@@ -375,27 +375,19 @@ int main (void) {
 		}
     	}
     	
-    	// Write the output into a separate file
-	ofstream MyFile;
-	
-	MyFile.open("EKmeans_vs_Lloyds_test.txt");
-	MyFile << "n  eps  time  iterations  RSS" << endl;
-	MyFile << "samples" << ' ' << n_iter_N << endl;
+    	// Write the output into a separate file	
 	
 	for (int n = 0; n < length_N; n++) {
-		MyFile << N[n] << ' ' << 0.0 << ' ' << time_standard_Kmeans[n] / ((double) n_iter_N) << ' ' << iterations_standard_Kmeans[n] / ((double) n_iter_N) << endl;
 		cout << "N: " << N[n] << endl;
 		cout << "Milliseconds standard: " << time_standard_Kmeans[n] / ((double) n_iter_N) << endl;
     		cout << "Iterations standard: " << iterations_standard_Kmeans[n] / ((double) n_iter_N) << endl << endl;
     		
 		for (int e = 0; e < length_eps; e++) {
-			MyFile << N[n] << ' ' << eps[e] << ' ' << time_EKMeans[n][e] / ((double) n_iter_N) << ' ' << iterations_EKMeans[n][e] / ((double) n_iter_N) << ' ' << RSS_EKMeans_Lloyds[n][e] << endl;
 			cout << "Miliseconds EKmeans: " << time_EKMeans[n][e] / ((double) n_iter_N) << endl;
     			cout << "Iterations EKmeans: " << iterations_EKMeans[n][e] / ((double) n_iter_N) << endl;
     			cout << "RSS EKmeans vs Lloyds (%): " << RSS_EKMeans_Lloyds[n][e] << endl;   			
     		}
 	}
-	MyFile.close();	
 
 	auto t1 = chrono::high_resolution_clock::now();
 	cout <<  chrono::duration_cast<chrono::seconds>(t1 - t0).count() << endl;
